@@ -1,0 +1,62 @@
+@startuml
+
+class Organization{
+    -name: String
+    -phome: String
+    -address: String
+    -employeeCount: Integer
+}
+
+
+class Measure {
+    -measur: String 
+    -description: String
+}
+
+class Disease {
+    - code: String 
+    - name: String
+    - measure : Measure
+    - description: String
+}
+
+enum Gender{
+    MALE, FEMALE
+}
+
+enum MarridationStatus{
+    SINGLE,MARRIDATE, DIVORCE
+}
+
+class Visited{
+    -firstname: String
+    -lastname: String
+    -nationalId: String
+    -gender: Gender
+    -birthday: Long
+    -job: String
+    -education: String
+    -phone: String
+    -address: String
+    -marridationStatus: MarridationStatus
+    -childCount: Integer
+    -ethnicity: String
+    -height: Float
+    -weight: Float
+    -organization: Organization
+}
+
+class RelVisitedDisease{
+    -disease: Disease
+    -visited: Visited
+    -datetime: Long
+    -value: Float
+}
+
+Disease "0..n"-->"1" Measure
+Visited "0..n".->"1" Gender
+Visited "0..n".->"1" MarridationStatus
+Visited "0..n"-->"1" Organization
+RelVisitedDisease "0..n"-->"0" Visited
+RelVisitedDisease "0..n"-->"0" Disease
+@enduml
