@@ -1,77 +1,56 @@
-package com.parmida.occupationalhealth.model;
+package com.parmida.occupationalhealth.dto;
 
 import java.io.Serial;
 
-import com.parmida.common.model.MainEntity;
+import com.parmida.common.dto.MainDto;
+import com.parmida.common.dto.RecordDto;
 import com.parmida.occupationalhealth.common.enumeration.Gender;
 import com.parmida.occupationalhealth.common.enumeration.MarridationStatus;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Index;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
+import jakarta.json.bind.JsonbBuilder;
 
-@Entity
-@Table(name = "VISTEDS", indexes = {
-		@Index(columnList = "ID_ORGANIZATION")}, uniqueConstraints = { @UniqueConstraint(columnNames = "NATIONAL_ID") })
-public class VistedEntity extends MainEntity {
+public class VisitedDto extends MainDto {
 	@Serial
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "FIRSTNAME")
+	public static record VisitedRecord(String firstname, String lastname, String nationalId, Gender gender,
+			Long birthday, String job, String education, String phone, String address,
+			MarridationStatus marridationStatus, Integer childCount, String ethnicity, Float height, Float weight,
+			OrganizhationDto organization) implements RecordDto {
+		public static final VisitedRecord fromString(String json) {
+			return JsonbBuilder.create().fromJson(json, VisitedRecord.class);
+		}
+	}
+
 	private String firstname;
 
-	@Column(name = "LASTNAME")
 	private String lastname;
 
-	@Column(name = "NATIONAL_ID")
 	private String nationalId;
 
-	@Column(name = "GENDER")
-	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
-	@Column(name = "BIRTHDAY")
 	private Long birthday;
 
-	@Column(name = "JOB")
 	private String job;
 
-	@Column(name = "EDUCATION")
 	private String education;
 
-	@Column(name = "PHONE")
 	private String phone;
 
-	@Column(name = "ADDRESS")
 	private String address;
 
-	@Column(name = "MARRIDATION_STATUS")
-	@Enumerated(EnumType.STRING)
 	private MarridationStatus marridationStatus;
 
-	@Column(name = "CHILDCOUNT")
 	private Integer childCount;
 
-	@Column(name = "ETHNICITY")
 	private String ethnicity;
 
-	@Column(name = "HEIGHT")
 	private Float height;
 
-	@Column(name = "WEIGHT")
 	private Float weight;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-	@JoinColumn(name = "ID_ORGANIZATION")
-	private Organization organization;
+	private OrganizhationDto organization;
 
 	public String getFirstname() {
 		return firstname;
@@ -185,12 +164,19 @@ public class VistedEntity extends MainEntity {
 		this.weight = weight;
 	}
 
-	public Organization getOrganization() {
+	public OrganizhationDto getOrganization() {
 		return organization;
 	}
 
-	public void setOrganization(Organization organization) {
+	public void setOrganization(OrganizhationDto organization) {
 		this.organization = organization;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public VisitedRecord getRecord() {
+		return new VisitedRecord(firstname, lastname, nationalId, gender, birthday, job, education, phone, address,
+				marridationStatus, childCount, ethnicity, height, weight, organization);
 	}
 
 }
