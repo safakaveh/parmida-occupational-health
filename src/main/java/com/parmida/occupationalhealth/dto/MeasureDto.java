@@ -48,6 +48,7 @@ public class MeasureDto extends MainDto {
 		this.description = description;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public MeasuRercord getRecord() {
 		return new MeasuRercord(measur, measurid, description);

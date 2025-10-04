@@ -16,7 +16,7 @@ public class VisitedDto extends MainDto {
 	public static record VisitedRecord(String firstname, String lastname, String nationalId, Gender gender,
 			Long birthday, String job, String education, String phone, String address,
 			MarridationStatus marridationStatus, Integer childCount, String ethnicity, Float height, Float weight,
-			OrganizhationDto organization) implements RecordDto {
+			OrganizationDto organization) implements RecordDto {
 		public static final VisitedRecord fromString(String json) {
 			return JsonbBuilder.create().fromJson(json, VisitedRecord.class);
 		}
@@ -50,7 +50,7 @@ public class VisitedDto extends MainDto {
 
 	private Float weight;
 
-	private OrganizhationDto organization;
+	private OrganizationDto organization;
 
 	public String getFirstname() {
 		return firstname;
@@ -164,11 +164,11 @@ public class VisitedDto extends MainDto {
 		this.weight = weight;
 	}
 
-	public OrganizhationDto getOrganization() {
+	public OrganizationDto getOrganization() {
 		return organization;
 	}
 
-	public void setOrganization(OrganizhationDto organization) {
+	public void setOrganization(OrganizationDto organization) {
 		this.organization = organization;
 	}
 

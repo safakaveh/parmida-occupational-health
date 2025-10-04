@@ -5,28 +5,28 @@ import java.io.Serial;
 import com.parmida.common.dto.MainDto;
 import com.parmida.common.dto.RecordDto;
 import com.parmida.occupationalhealth.model.JobEntity;
-import com.parmida.occupationalhealth.model.VisitedEntity;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.json.bind.JsonbBuilder;
 
 public class RelVisitedJobDto extends MainDto {
 	@Serial
 	private static final long serialVersionUID = 1L;
 
-	public record RelVisitedRecord () implements RecordDto {}
-	
+	public record RelVisitedJobRecord(JobEntity job, String workingConditions, Boolean hasProblem, VisitedDto visited,
+			Long datetime) implements RecordDto {
+		public static final RelVisitedJobRecord fromString(String json) {
+			return JsonbBuilder.create().fromJson(json, RelVisitedJobRecord.class);
+		}
+	}
+
 	private JobEntity job;
-	
+
 	private String workingConditions;
-	
+
 	private Boolean hasProblem;
-	
-	private VisitedDto visited;          	
-	
+
+	private VisitedDto visited;
+
 	private Long datetime;
 
 	public JobEntity getJob() {
@@ -68,11 +68,12 @@ public class RelVisitedJobDto extends MainDto {
 	public void setDatetime(Long datetime) {
 		this.datetime = datetime;
 	}
-	@Override
-	public <T extends RecordDto> T getRecord() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public RelVisitedJobRecord getRecord() {
+		// TODO Auto-generated method stub
+		return new RelVisitedJobRecord(job, workingConditions, hasProblem, visited, datetime);
+	}
 
 }

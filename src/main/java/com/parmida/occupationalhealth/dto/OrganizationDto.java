@@ -5,18 +5,24 @@ import java.io.Serial;
 import com.parmida.common.dto.MainDto;
 import com.parmida.common.dto.RecordDto;
 
-import jakarta.persistence.Column;
+import jakarta.json.bind.JsonbBuilder;
 
-public class OrganizhationDto extends MainDto {
+public class OrganizationDto extends MainDto {
 	@Serial
 	private static final long serialVersionUID = 1L;
 
-	public record OrganizhationRecord ()  implements RecordDto {}
-	
+	public record OrganizationRecord(String name, String phone, String address, Integer employeeCount)
+			implements RecordDto {
+		public static final OrganizationRecord fromString(String json) {
+			return JsonbBuilder.create().fromJson(json, OrganizationRecord.class);
+		}
+
+	}
+
 	private String name;
-	
+
 	private String phone;
-	
+
 	private String address;
 
 	private Integer employeeCount;
@@ -52,12 +58,11 @@ public class OrganizhationDto extends MainDto {
 	public void setEmployeeCount(Integer employeeCount) {
 		this.employeeCount = employeeCount;
 	}
+
+	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends RecordDto> T getRecord() {
-		// TODO Auto-generated method stub
-		return null;
+	public OrganizationRecord getRecord() {
+		return new OrganizationRecord(name, phone, address, employeeCount);
 	}
-
-
 
 }

@@ -4,35 +4,32 @@ import java.io.Serial;
 
 import com.parmida.common.dto.MainDto;
 import com.parmida.common.dto.RecordDto;
-import com.parmida.occupationalhealth.model.MeasureEntity;
-import com.parmida.occupationalhealth.model.MedicalCheckUpsease;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.json.bind.JsonbBuilder;
 
 public class MedicalCheckUpseaseDto extends MainDto {
 	@Serial
 	private static final long serialVersionUID = 1L;
 
-	
-	public record MedicalCheckUpseaseDtoRecord()  implements RecordDto {}
-	
-	
+	public record MedicalCheckUpseaseDtoRecord(String code, MedicalCheckUpseaseDto parent, String name,
+			MeasureDto measure, float maxMeasur, float minMeasur) implements RecordDto {
+		public static final MedicalCheckUpseaseDtoRecord fromString(String json) {
+			return JsonbBuilder.create().fromJson(json, MedicalCheckUpseaseDtoRecord.class);
+		}
+	}
+
 	private String code;
-	
-	private MedicalCheckUpsease parent;
-	
+
+	private MedicalCheckUpseaseDto parent;
+
 	private String name;
 
-	private MeasureDto measure ;
-	
+	private MeasureDto measure;
+
 	private float maxMeasur;
-	
+
 	private float minMeasur;
-	
+
 	private String description;
 
 	public String getCode() {
@@ -43,11 +40,11 @@ public class MedicalCheckUpseaseDto extends MainDto {
 		this.code = code;
 	}
 
-	public MedicalCheckUpsease getParent() {
+	public MedicalCheckUpseaseDto getParent() {
 		return parent;
 	}
 
-	public void setParent(MedicalCheckUpsease parent) {
+	public void setParent(MedicalCheckUpseaseDto parent) {
 		this.parent = parent;
 	}
 
@@ -90,12 +87,11 @@ public class MedicalCheckUpseaseDto extends MainDto {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends RecordDto> T getRecord() {
-		// TODO Auto-generated method stub
-		return null;
+	public MedicalCheckUpseaseDtoRecord getRecord() {
+		return new MedicalCheckUpseaseDtoRecord(code, parent, name, measure, maxMeasur, minMeasur);
 	}
-
-
 
 }

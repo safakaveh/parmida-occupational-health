@@ -12,14 +12,14 @@ public class JobDto extends MainDto {
 	@Serial
 	private static final long serialVersionUID = 1L;
 
-	public static record JobRecord(OrganizhationDto organization, String measur, JobDto parent, String description)
+	public static record JobRecord(OrganizationDto organization, String measur, JobDto parent, String description)
 			implements RecordDto {
 		public static final VisitedRecord fromString(String json) {
 			return JsonbBuilder.create().fromJson(json, VisitedRecord.class);
 		}
 	}
 
-	private OrganizhationDto organization;
+	private OrganizationDto organization;
 
 	private String measur;
 
@@ -27,11 +27,11 @@ public class JobDto extends MainDto {
 
 	private String description;
 
-	public OrganizhationDto getOrganization() {
+	public OrganizationDto getOrganization() {
 		return organization;
 	}
 
-	public void setOrganization(OrganizhationDto organization) {
+	public void setOrganization(OrganizationDto organization) {
 		this.organization = organization;
 	}
 
