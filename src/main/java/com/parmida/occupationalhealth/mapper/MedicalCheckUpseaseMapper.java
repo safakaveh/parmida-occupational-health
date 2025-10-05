@@ -4,6 +4,8 @@ import com.parmida.common.mapper.MainMapper;
 import com.parmida.occupationalhealth.dto.MedicalCheckUpseaseDto;
 import com.parmida.occupationalhealth.model.MedicalCheckupseaseEntity;
 
+import jakarta.enterprise.context.ApplicationScoped;
+@ApplicationScoped
 public class MedicalCheckUpseaseMapper implements MainMapper<MedicalCheckUpseaseDto, MedicalCheckupseaseEntity> {
 
 	@Override
