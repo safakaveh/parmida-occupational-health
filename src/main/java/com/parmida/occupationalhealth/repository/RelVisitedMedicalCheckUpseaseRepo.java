@@ -1,10 +1,11 @@
 package com.parmida.occupationalhealth.repository;
 
-import com.parmida.occupationalhealth.model.OrganizationEntity;
+import com.parmida.occupationalhealth.model.RelVisitedMedicalCheckUpseaseEntity;
 
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
+
 @ApplicationScoped
-public class RelVisitedMedicalCheckUpseaseRepo implements PanacheRepository<OrganizationEntity>{ {
+public class RelVisitedMedicalCheckUpseaseRepo implements PanacheRepository<RelVisitedMedicalCheckUpseaseEntity> {
 
 }

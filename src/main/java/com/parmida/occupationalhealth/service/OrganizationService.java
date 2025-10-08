@@ -13,6 +13,7 @@ public class OrganizationService {
 
 	@Inject
 	private OrganizationRepo organizationRepo;
+	
 	@Inject
 	private OrganizationMapper organizationMapper;
 
