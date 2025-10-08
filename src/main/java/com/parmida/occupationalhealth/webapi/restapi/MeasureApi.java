@@ -8,7 +8,6 @@ import jakarta.ws.rs.core.MediaType;
 @Path("/measure")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-
 public class MeasureApi {
 
 }
