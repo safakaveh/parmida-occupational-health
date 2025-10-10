@@ -29,10 +29,10 @@ public class RelVisitedMedicalCheckUpseaseEntity extends MainEntity {
 	@JoinColumn(name = "ID_VISITED")
 	private VisitedEntity visited;
 
-	@Column(name = "DATETIME")
+	@Column(name = "DATE_TIME")
 	private Long datetime;
 
-	@Column(name = "VALUE")
+	@Column(name = "RELVISITED_MEDICAL_CHECK_UPSEASE_VALUE")
 	private Float value;
 
 	public MedicalCheckupseaseEntity getMdicalCheckUpsease() {

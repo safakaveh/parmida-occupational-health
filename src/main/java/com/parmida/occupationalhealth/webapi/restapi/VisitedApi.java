@@ -1,8 +1,6 @@
 package com.parmida.occupationalhealth.webapi.restapi;
 
-import com.parmida.occupationalhealth.dto.RelVisitedMedicalCheckUpseaseDto;
 import com.parmida.occupationalhealth.dto.VisitedDto;
-import com.parmida.occupationalhealth.service.RelVisitedMedicalCheckUpseaseService;
 import com.parmida.occupationalhealth.service.VisitedService;
 
 import jakarta.inject.Inject;
@@ -19,13 +17,11 @@ import jakarta.ws.rs.core.Response.Status;
 
 public class VisitedApi {
 	@Inject
-	private VisitedService  visitedService;
+	private VisitedService visitedService;
 
-	public Response save(VisitedDto  visited) {
+	public Response save(VisitedDto visited) {
 		VisitedDto dto = visitedService.save(visited);
 		return Response.status(Status.CREATED).entity(dto).build();
 	}
-
-
 
 }
